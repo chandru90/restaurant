@@ -7,8 +7,15 @@ function additem(e)
     var description1 =document.getElementById('description').value;
     var category=document.getElementById('category').value
     const obj ={amount1,description1,category}
-
-    localStorage.setItem(obj.amount1,JSON.stringify(obj))
+    axios.post("https://crudcrud.com/api/64de2d79843c491dadfb3910b5420d3b/appointment",obj)
+    .then((response)=>{
+        console.log(response)
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+    //localStorage.setItem(obj.amount1,JSON.stringify(obj))
+  //  console.log(obj._id)
     printelement(obj)
 }
 
@@ -41,7 +48,15 @@ deletebtn.type="button"
 deletebtn.value='delete'
 deletebtn.onclick =() =>
 {
-  localStorage.removeItem(obj.amount)
+//const obj={_id,amount1,description1,category}
+axios.delete('https://crudcrud.com/api/64de2d79843c491dadfb3910b5420d3b/appointment/${obj._id}')
+.then((response)=>{
+    console.log(response)
+})
+.catch((err)=>{
+    console.log(err)
+})
+  //localStorage.removeItem(obj._uid)
     parentelement.removeChild(childelement)
 }
     childelement.appendChild(editbtn)
